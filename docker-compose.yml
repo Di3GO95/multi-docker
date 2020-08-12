@@ -1,0 +1,20 @@
+version: '3'
+services: 
+    postgres:
+        image: 'postgres:latest'
+        environment: 
+            - POSTGRES_PASSWORD=postgress_password
+    redis:
+        image: 'redis:latest'
+    server:
+        stdin_open: true    # -i
+        tty: true           # -t
+        build:
+            context: ./server
+            dockerfile: Dockerfile.dev
+        volumes: 
+            - /app/node_modules
+            - /D/_projects/work/udemy/dockerAndKubernetes/git/complex/server:/app # everything in this folder is mapped to the app folder 
+        environment: 
+            - REDIS_HOST=redis
+            - REDIS_PORT=6379
