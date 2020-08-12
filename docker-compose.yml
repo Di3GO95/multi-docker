@@ -22,6 +22,8 @@ services:
         volumes: 
             - /app/node_modules # Dont override this folder
             - /D/_projects/work/udemy/dockerAndKubernetes/git/complex/server:/app # everything in this folder is mapped to the app folder 
+        depends_on: 
+            - postgres
         environment: 
             - REDIS_HOST=redis # name of the service that we created
             - REDIS_PORT=6379
@@ -44,4 +46,7 @@ services:
         volumes:
             - /app/node_modules # Dont override this folder
             - /D/_projects/work/udemy/dockerAndKubernetes/git/complex/worker:/app # everything in this folder is mapped to the app folder 
+        environment: 
+            - REDIS_HOST=redis
+            - REDIS_PORT=6379
             
