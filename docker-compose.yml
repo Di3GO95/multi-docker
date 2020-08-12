@@ -23,3 +23,18 @@ services:
             - PGDATABASE=postgres
             - PGPASSWORD=postgres_password
             - PGPORT=5432
+    client:
+        build:
+            context: ./client
+            dockerfile: Dockerfile.dev
+        volumes:
+            - /app/node_modules # Dont override this folder
+            - /D/_projects/work/udemy/dockerAndKubernetes/git/complex/client:/app # everything in this folder is mapped to the app folder 
+    worker:
+        build:
+            context: ./worker
+            dockerfile: Dockerfile.dev
+        volumes:
+            - /app/node_modules # Dont override this folder
+            - /D/_projects/work/udemy/dockerAndKubernetes/git/complex/worker:/app # everything in this folder is mapped to the app folder 
+            
